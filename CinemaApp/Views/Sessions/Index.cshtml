@@ -1,0 +1,45 @@
+﻿@model List<IGrouping<CinemaApp.Models.Movie, CinemaApp.Models.Session>>
+
+<section class="schedule-hero">
+    <div class="schedule-hero-inner">
+        <h1>Schedule</h1>
+
+        <input class="schedule-search" placeholder="Search" />
+    </div>
+</section>
+
+<section class="schedule-filters">
+    <button class="filter active">All movies</button>
+    <button class="filter">2D</button>
+    <button class="filter highlight">3D</button>
+    <button class="filter">4D</button>
+    <button class="filter">IMAX</button>
+    <button class="filter">IMAX 3D</button>
+</section>
+
+<section class="schedule-list">
+    @foreach (var group in Model)
+    {
+        var movie = group.Key;
+
+        <div class="schedule-card">
+
+            <img class="schedule-poster" src="@movie.ImageUrl" />
+
+            <div class="schedule-info">
+                <h3>@movie.Title</h3>
+
+                <div class="schedule-times">
+                    @foreach (var session in group)
+                    {
+                        <a class="time-btn"
+                           href="/Sessions/Details/@session.Id">
+                            @session.StartTime.ToString("HH:mm")
+                        </a>
+                    }
+                </div>
+            </div>
+
+        </div>
+    }
+</section>
