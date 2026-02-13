@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CinemaApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CinemaApp.styles.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Afacad:wght@400;500;600&family=Poller+One&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header class="main-navbar">
+        <div class="nav-container">
+            <a class="logo" asp-controller="Home" asp-action="Index">Lumière</a>
+
+            <nav class="nav-links">
+                <a asp-controller="Home" asp-action="Index">Home</a>
+                <a asp-controller="Sessions" asp-action="Index">Schedule</a>
+                <a asp-controller="Movies" asp-action="Index">Movies</a>
+                <a href="#">News</a>
+            </nav>
+
+            <div class="nav-right">
+                <a class="signin-btn" href="/Account/Login">Sign in</a>
+            </div>
+        </div>
+    </header>
+
+    <main role="main" class="page-content">
+        @RenderBody()
+    </main>
+
+
+    @* <footer class="footer"> *@
+    @*     <div class="footer-inner"> *@
+    @*         © 2026 — CinemaApp — Privacy *@
+    @*     </div> *@
+    @* </footer> *@
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

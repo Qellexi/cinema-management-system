@@ -1,0 +1,81 @@
+﻿@model List<CinemaApp.Models.Movie>
+@{
+    var newMovies = ViewBag.NewMovies as List<CinemaApp.Models.Movie> ?? new List<CinemaApp.Models.Movie>();
+    var comingSoon = ViewBag.ComingSoon as List<CinemaApp.Models.Movie> ?? new List<CinemaApp.Models.Movie>();
+}
+
+<div class="slider">
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var movie = Model[i];
+        <div class="slide @(i == 0 ? "active" : "")"
+             style="background-image:url('@movie.ImageUrl')">
+
+            <div class="slide-overlay">
+
+                <!-- Центральна кнопка play -->
+                @if (!string.IsNullOrEmpty(movie.TrailerUrl))
+                {
+                    <a href="@movie.TrailerUrl" class="play-circle" target="_blank">
+                        ▶
+                    </a>
+                }
+
+                <!-- Нижній контент -->
+                <div class="slide-bottom">
+                    <div class="slide-info">
+                        <h2>@movie.Title</h2>
+                        <a class="btn" href="/Home/Details/@movie.Id">
+                            Book ticket
+                        </a>
+                    </div>
+
+                    <div class="slide-nav">
+                        <button onclick="prevSlide()">‹</button>
+
+                        <div class="slide-numbers">
+                            @for (int n = 1; n <= Model.Count; n++)
+                            {
+                                <span class="@(n == 1 ? "active" : "")">
+                                    @n.ToString("00")
+                                </span>
+                            }
+                        </div>
+
+                        <button onclick="nextSlide()">›</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+<!-- NEW THIS WEEK -->
+<section class="movie-section">
+    <h3>New this week</h3>
+    <div class="movie-row">
+        @foreach (var movie in newMovies)
+        {
+            <div class="movie-card">
+                <img src="@movie.ImageUrl" />
+                <h4>@movie.Title</h4>
+                <p>@movie.Genre</p>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- COMING SOON -->
+<section class="movie-section">
+    <h3>Coming soon</h3>
+    <div class="movie-row">
+        @foreach (var movie in comingSoon)
+        {
+            <div class="movie-card">
+                <img src="@movie.ImageUrl" />
+                <h4>@movie.Title</h4>
+                <p>@movie.Genre</p>
+            </div>
+        }
+    </div>
+</section>
